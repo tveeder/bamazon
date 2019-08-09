@@ -25,8 +25,8 @@ connection.connect(function (err) {
 
 function start() {
 
-    console.log('function start() was called')
-    console.log('list everything that is for sale')
+    //console.log('function start() was called')
+    //console.log('list everything that is for sale')
 
     //prints the items for sale and their details
     //res is your object
@@ -52,8 +52,8 @@ function start() {
                 name: "id",
                 message: "What is the ID of the product you would like to purchase?",
                 validate: function (value) {
-                    console.log(value);
-                    console.log('test one')
+                    //console.log(value);
+                    //console.log('test one')
                     if (isNaN(value) == false && parseInt(value) <= res.length && parseInt(value) > 0) {
                         return true;
                     } else {
@@ -76,13 +76,13 @@ function start() {
                 }
             },
         ]).then(function (answer) {
-            console.log('test two')
-            console.log(answer)
-            console.log(answer.id)
-            console.log(answer.qty)
+            //console.log('test two')
+            //console.log(answer)
+            //console.log(answer.id)
+            //console.log(answer.qty)
             var whatToBuy = (answer.id) - 1;   // this is going to decrement the item
             var howMuchToBuy = parseInt(answer.qty);
-            var grandTotal = parseFloat(((res[whatToBuy].Price) * howMuchToBuy).toFixed(2));
+            var grandTotal = parseFloat(((res[whatToBuy].price) * howMuchToBuy).toFixed(2));
 
             // checks to see if the supply of the item sufficient?
             if (res[whatToBuy].stock_quantity >= howMuchToBuy) {
@@ -92,17 +92,18 @@ function start() {
                     { item_id: answer.id }
                 ], function (err, result) {
                     if (err) throw err;
-                    console.log("Success! Your total is $" + grandTotal.toFixed(2) + ". A Bamazon Drone will deliever your items");
+                    console.log("Success! Your total is $" + grandTotal.toFixed(2) + ". A Bamazon Drone will deliever your items!");
                 });
 
 
-                console.log('testing for departments ')
+                //console.log('testing for departments ')
                 connection.query("SELECT * FROM Departments", function (err, deptRes) {
-                    console.log(deptRes)
+                    // console.log(deptRes)
                     if (err) throw err;
-                    var index;
-                    console.log(index)
-                    console.log(deptRes.length)
+                    //var index;
+                    var index = 0;
+                    //console.log(index)
+                    // console.log(deptRes.length)
                     for (var i = 0; i < deptRes.length; i++) {
                         if (deptRes[i].DepartmentName === res[whatToBuy].DepartmentName) {
                             index = i;
@@ -111,7 +112,9 @@ function start() {
 
                     //updates totalSales in departments table
 
-                    console.log('testing for total sales ')
+                    // console.log('testing for total sales ')
+                    //  console.log("Index:", index);
+                    // console.log(deptRes)
                     connection.query("UPDATE Departments SET ? WHERE ?", [
                         { TotalSales: deptRes[index].TotalSales + grandTotal },
                         { DepartmentName: res[whatToBuy].DepartmentName }
@@ -133,30 +136,6 @@ function start() {
 }
 
 
-
-// console.log("\nID: 55444 " + " Department: sporting goods " + " Price: 8.95 " + " QTY: 65 ");
-// console.log('+++++++++++++++++++++++++++++++++++++')
-// console.log("\nID: 877 " + " Department: hockey " + " Price: 11.35 " + " QTY: 99 ");
-// console.log('+++++++++++++++++++++++++++++++++++++')
-// console.log("\nID: 33333 " + " Department: baseball " + " Price: 21.33 " + " QTY: 33 ");
-// console.log('+++++++++++++++++++++++++++++++++++++')
-// console.log("\nID: 3434 " + " Department: sporting goods " + " Price: 23.5 " + " QTY: 625 ");
-// console.log('+++++++++++++++++++++++++++++++++++++')
-
-
-// worked with tutor to connect to database
-//  connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-//     if (error) throw error;
-//     console.log('The solution is: ', results[0].solution);
-// });
-
-// function afterConnection() {
-//     connection.query("SELECT * FROM products", function (err, res) {
-//         if (err) throw err;
-//         console.log(res);
-//         connection.end();
-//     });
-// }
 
 //worked w/ tutor to connect to database
 // use mysql;
