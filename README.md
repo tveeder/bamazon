@@ -1,6 +1,8 @@
 # bamazon
 Inventory Control of Shopping site
 
+********** screenshots added to the Issues tab ****************
+
 
 
 Bamazon Repo -
