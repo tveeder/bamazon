@@ -5,7 +5,11 @@ Inventory Control of Shopping site
 
 
 
-<img src="/images/img1.png" width="400" height="400">
+<img src="/images/img 1.png" width="400" height="200">
+
+<img src="/images/img 2.png" width="400" height="200">
+
+<img src="/images/img 3.png" width="400" height="200">
 
 
 Bamazon Repo -
